@@ -20,8 +20,8 @@ module.exports.upload1 = function(application, req, res){
       //var newpath = 'C:/fotos/' + files.filetoupload.name;
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
-        res.write('File uploaded and moved!');
-        res.end();
+        //res.write('File uploaded and moved!');
+        //res.end();
     });
 });
 
