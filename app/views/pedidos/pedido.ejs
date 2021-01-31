@@ -191,12 +191,17 @@ else id = pedido[0].id;
 
                   <% }} %>
 
-                  <h3 class="text-center">Total: R$ <span id ="totalt" ><%= total %></span></h3>
+                  <h3 class="text-center">Total: <span id ="totalt" ><%= total %></span></h3>
 
                 </tbody>
-              </table>
+              </table>          
 
-             
+              <script>
+                var numero = parseFloat(document.getElementById("totalt").innerHTML);
+                var dinheiro = numero.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+                document.getElementById("totalt").innerHTML=dinheiro;
+
+              </script>
 
 
               
