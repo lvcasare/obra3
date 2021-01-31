@@ -11,8 +11,8 @@ PedidosDAO.prototype.carregarPedido = function (pedidoid, callback){
     
 }
 
-PedidosDAO.prototype.carregarPedido2 = function (pedidoid,callback){
-    
+
+PedidosDAO.prototype.carregarPedido2 = function (pedidoid,callback){   
     
     this._connection.query('SELECT * FROM pedidos WHERE id = '+ pedidoid, callback);  
 }
