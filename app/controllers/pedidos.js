@@ -28,12 +28,26 @@ module.exports.pedido = function(application, req, res){
             //retorna itens
 
             else {
+
+                     //console.log(pedidoid);
+                    
+                    var pedidobusca;
+                    var connection = application.config.dbConnection();// conexão com o bd que vem config/dbConnection     
+                    var pedidosModel = new application.app.models.pedidosDAO(connection);// query        
+                    var callback2 = function(erro,result){//connection.query(<sql>, <f. call back>)
+                        pedidobusca = result;
+                            //console.log(produtosresult);
+                                };                            
+                    pedidosModel.carregarPedido2(pedidoid,callback2)//chama query e manda para o call back
+
+
+
                 var itensModel = new application.app.models.itensDAO(connection);// query        
                 var callback1 = function(erro,result){//connection.query(<sql>, <f. call back>)
                     //console.log(result);
                     var result1 = '[{ "id":55}]';
                     result1 = JSON.parse(result1);
-                    res.render('pedidos/pedido.ejs',{itens:result, produtos:produtosresult});;
+                    res.render('pedidos/pedido.ejs',{itens:result, produtos:produtosresult,pedidobusca:pedidobusca});;
                     };                            
                 itensModel.carregarItens(pedidoid, callback1)//chama query e manda para o call back
             }
