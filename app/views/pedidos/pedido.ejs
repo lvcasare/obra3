@@ -69,6 +69,10 @@ else id = pedido[0].id;
                       <label for="exampleFormControlInput1">Desconto</label>
                       <input autocomplete="off"type="text" class="form-control" value="0"  id="desconto" name="desconto"  placeholder=""onchange="myFunction2()">
 
+                      <label for="exampleFormControlInput1">Data</label>
+                      <input autocomplete="off"type="date" class="form-control" value="0"  id="data" name="data"  placeholder=""onchange="myFunction2()">                      
+
+
                       <label for="exampleFormControlInput1">Total</label>
                       <input class="form-control" type="text" placeholder="0" id="total1" name="total" readonly>
                       <input class="form-control"  type="text" value="<%= id %>" id="pedidoid1" name="pedidoid" readonly style="display: none;" >
@@ -98,6 +102,9 @@ else id = pedido[0].id;
                       <label for="exampleFormControlInput1">Desconto</label>
                       <input autocomplete="off"type="text" class="form-control"  value="0"  id="desconto1" name="desconto"  placeholder=""onchange="myFunction()">
 
+                      <label for="exampleFormControlInput1">Data</label>
+                      <input autocomplete="off"type="date" class="form-control" value="0"  id="data1" name="data"  placeholder=""onchange="myFunction2()">
+
                       <label for="exampleFormControlInput1">Total</label>
                       <input class="form-control" type="text" placeholder="0" id="total" name="total" readonly>
                       <input class="form-control"  type="text" value="<%= id %>" id="pedidoid" name="pedidoid" readonly style="display: none;" >
@@ -108,10 +115,24 @@ else id = pedido[0].id;
     
                 </form>
 
+                <script>                
+                  now = new Date;
+                  var mes = now.getMonth()+1;
+                  if (mes>9)                  
+                  var data =now.getFullYear()+'-1'+mes+'-'+now.getDate();
+                  else
+                  var data =now.getFullYear()+'-0'+mes+'-'+now.getDate();             
+                  document.getElementById("data").value= data;
+                  document.getElementById("data1").value= data;
 
 
-                <script>
-                  
+                </script>
+
+
+
+                <script>               
+
+               
                 function myFunction() {
                   var x = document.getElementById("unitario1").value;
                   var y = document.getElementById("quantidade1").value;
@@ -170,9 +191,12 @@ else id = pedido[0].id;
 
                   <% }} %>
 
-                  <h3 class="text-center">Total: R$ <%= total %></h3>
+                  <h3 class="text-center">Total: R$ <span id ="totalt" ><%= total %></span></h3>
+
                 </tbody>
               </table>
+
+             
 
 
               
