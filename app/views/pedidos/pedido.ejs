@@ -194,6 +194,9 @@ else id = pedido[0].id;
                     <option>Elétrica</option>
                     <option>Pintura</option>
                     <option>Outros</option>
+                    <% if (typeof pedidobusca==="undefined"){}else{ %>
+                      <option value="1" selected><%= pedidobusca[0].fase%></option>
+                      <% } %>
                   </select>
 
                   <label for="exampleFormControlInput1">Total</label>
