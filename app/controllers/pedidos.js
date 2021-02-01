@@ -1,55 +1,50 @@
 module.exports.pedido = function(application, req, res){
-    var id_pedido=req.query;
+    var get=req.query;
     var pedidoid=0;
-    if (id_pedido.id!=null) pedidoid=id_pedido.id;
+    if (get.id!=null) pedidoid=get.id;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     //console.log(pedidoid);
+    // carregaprodutos para por na seleção   
     var produtosresult;
-    var connection = application.config.dbConnection();// conexão com o bd que vem config/dbConnection     
-    var produtosModel = new application.app.models.produtosDAO(connection);// query        
-    var callback1 = function(erro,result){//connection.query(<sql>, <f. call back>)
+    var connection = application.config.dbConnection();   
+    var produtosModel = new application.app.models.produtosDAO(connection);      
+    var callback1 = function(erro,result){
             produtosresult = result;
-            //console.log(produtosresult);
                 };                            
     produtosModel.carregarProdutos(callback1)//chama query e manda para o call back
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (pedidoid==0){
         // se id = 0 
             //cria novo pedido
-        var pedidosModel = new application.app.models.pedidosDAO(connection);// query        
-        var callback = function(erro,result){//connection.query(<sql>, <f. call back>)            
-            console.log(result);
-            //console.log(result1);
-            res.render('pedidos/pedido.ejs',{pedido:result, produtos:produtosresult}, );;
+        var pedidosModel = new application.app.models.pedidosDAO(connection);       
+        var callback = function(erro,result){         
+            //console.log(result);
+            pedidoid=result[0].id;
+            res.render('pedidos/pedido.ejs',{pedido:result, produtos:produtosresult, pedidoid:pedidoid});;
             };        
-        pedidosModel.carregarPedido(pedidoid, callback)//chama query e manda para o call back
+        pedidosModel.carregarPedido(pedidoid, callback)
     }
     // se id != 0 
-            //retorna itens
+            //se já tem pedido
 
             else {
-
-                     //console.log(pedidoid);
-                    
-                    var pedidobusca;
-                    var connection = application.config.dbConnection();// conexão com o bd que vem config/dbConnection     
-                    var pedidosModel = new application.app.models.pedidosDAO(connection);// query        
-                    var callback2 = function(erro,result){//connection.query(<sql>, <f. call back>)
+                //carrega pedido para mostrar informações sobre ele   
+                var pedidobusca;
+                var connection = application.config.dbConnection(); 
+                var pedidosModel = new application.app.models.pedidosDAO(connection);     
+                var callback2 = function(erro,result){
                         pedidobusca = result;
-                            //console.log(produtosresult);
                                 };                            
-                    pedidosModel.carregarPedido2(pedidoid,callback2)//chama query e manda para o call back
+                pedidosModel.carregarPedido2(pedidoid,callback2)
 
 
-
-                var itensModel = new application.app.models.itensDAO(connection);// query        
-                var callback1 = function(erro,result){//connection.query(<sql>, <f. call back>)
-                    //console.log(result);
+                // itens do pedido
+                var itensModel = new application.app.models.itensDAO(connection);      
+                var callback1 = function(erro,result){
                     var result1 = '[{ "id":55}]';
                     result1 = JSON.parse(result1);
-                    res.render('pedidos/pedido.ejs',{itens:result, produtos:produtosresult,pedidobusca:pedidobusca});;
+                    res.render('pedidos/pedido.ejs',{itens:result, produtos:produtosresult,pedidobusca:pedidobusca, pedidoid:pedidoid});;
                     };                            
-                itensModel.carregarItens(pedidoid, callback1)//chama query e manda para o call back
+                itensModel.carregarItens(pedidoid, callback1)
             }
     
 }
@@ -57,38 +52,35 @@ module.exports.pedido = function(application, req, res){
 module.exports.adicionarnovo = function(application, req, res){
         var pedido = req.body;
         var id_pedido=req.query;
-        //console.log("este "+id_pedido.id)
-        var connection = application.config.dbConnection();// conexão com o bd que vem config/dbConnection    
-        var pedidosModel = new application.app.models.pedidosDAO(connection);// query
-        var callback = function(erro,result){//connection.query(<sql>, <f. call back>)
+        var connection = application.config.dbConnection();
+        var pedidosModel = new application.app.models.pedidosDAO(connection);
+        var callback = function(erro,result){
             res.redirect('/pedido?id='+id_pedido.id);
             };        
-            pedidosModel.adicionarNovo(pedido, callback)//chama query e manda para o call back
+            pedidosModel.adicionarNovo(pedido, callback)
 }
 
 module.exports.adicionarantigo = function(application, req, res){
     var pedido = req.body;
     var id_pedido=req.query;
-    //console.log("este "+id_pedido.id)
-    var connection = application.config.dbConnection();// conexão com o bd que vem config/dbConnection    
-    var itensModel = new application.app.models.itensDAO(connection);// query
-    var callback = function(erro,result){//connection.query(<sql>, <f. call back>)
+    var connection = application.config.dbConnection(); 
+    var itensModel = new application.app.models.itensDAO(connection);
+    var callback = function(erro,result){
         res.redirect('/pedido?id='+id_pedido.id);
         };        
-    itensModel.adicionarAntigo(pedido, callback)//chama query e manda para o call back
+    itensModel.adicionarAntigo(pedido, callback)
 }
 
 
 module.exports.editarpedido = function(application, req, res){
     var pedido = req.body;
     var id_pedido=req.query;
-    //console.log("este "+id_pedido.id)
-    var connection = application.config.dbConnection();// conexão com o bd que vem config/dbConnection    
-    var pedidosModel = new application.app.models.pedidosDAO(connection);// query
-    var callback = function(erro,result){//connection.query(<sql>, <f. call back>)
+    var connection = application.config.dbConnection();
+    var pedidosModel = new application.app.models.pedidosDAO(connection);
+    var callback = function(erro,result){
         res.redirect('/pedido?id='+id_pedido.id);
         };        
-    pedidosModel.editarPedido(pedido, callback)//chama query e manda para o call back
+    pedidosModel.editarPedido(pedido, callback)
 }
 
 
