@@ -36,16 +36,49 @@
 </nav>
 
 <% 
-var id=0;
-if (typeof pedido === "undefined")  id = itens[0].pedidoid;
-else id = pedido[0].id; 
+var id=pedidoid;
 %>
+    
 
-    <h2 class="text-center">Pedido número <%= id %></h2>
+    <h2 class="text-center">Pedido número <%= pedidoid %></h2>
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm border">
+
+
+              <form class="pt-3" action="/pedido/editarpedido?id=<%= id%>" method="POST"> 
+                <div class="form-group" >
+                    <h4 class="text-center">Finalizar pedido </h4>
+
+                  <label for="exampleFormControlInput1">Fase da obra</label>
+                  <select class="form-control" id="fase" name="fase">
+                    <option>Fundação</option>
+                    <option>Alvenaria/Paredes</option>
+                    <option>Laje/Viga Respaldo</option>
+                    <option>Telhado</option>
+                    <option>Reboque</option>
+                    <option>Contrapiso</option>
+                    <option>Piso/Revestimento</option>
+                    <option>Portas/Janelas</option>
+                    <option>Louças/Hidrálica</option>
+                    <option>Elétrica</option>
+                    <option>Pintura</option>
+                    <option>Outros</option>
+                    <% if (typeof pedidobusca==="undefined"){}else{ %>
+                      <option value="1" selected><%= pedidobusca[0].fase%></option>
+                      <% } %>
+                  </select>
+
+                  <label for="exampleFormControlInput1">Total</label>
+                  <input class="form-control" type="text" placeholder="0" id="total2" name="total" value="0" readonly style="display: none;">
+                  <input class="form-control"  type="text" value="<%= id %>" id="pedidoid2" name="id" readonly style="display: none;" >
+                  
+                </div>
+                <div class="border-bottom pb-2"><button type="submit" class="btn btn-primary">Abrir Pedido</button></div> 
+              </form>
+
+              <% if (typeof pedidobusca==="undefined"){}else{ %>
 
               <form class="pt-3" action="/pedido/adicionarantigo?id=<%= id%>" method="POST">
                     <div class="form-group">
@@ -83,37 +116,68 @@ else id = pedido[0].id;
     
                 </form>
 
+
+                
+
+
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-lg mt-2 mb-2" data-toggle="modal" data-target="#myModal1">Cadastrar</button>
+
+                <!-- Modal -->
+                <div id="myModal1" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+
+                      <div class="modal-body">
+
+
+                        <form class="" action="/pedido/adicionarnovo?id=<%= id%>" method="POST">
+                          <div class="form-group" >
+                              <h4 class="text-center">Adicionar ao pedido e Cadastrar </h4>
+          
+                            <label for="exampleFormControlInput1">Produto</label>
+                            <input autocomplete="off"type="text" class="form-control" id="nome" name="nome" placeholder="">
+          
+                            <label for="exampleFormControlInput1">Quantidade</label>
+                            <input autocomplete="off"type="text" class="form-control"  id="quantidade1" name="quantidade"  placeholder=""onchange="myFunction()">
+      
+                            <label for="exampleFormControlInput1">Valor unitário</label>
+                            <input autocomplete="off"type="text"  class="form-control" id="unitario1" name="unitario"  placeholder="" onchange="myFunction()">
+      
+                            <label for="exampleFormControlInput1">Desconto</label>
+                            <input autocomplete="off"type="text" class="form-control"  value="0"  id="desconto1" name="desconto"  placeholder=""onchange="myFunction()">
+      
+                            <label for="exampleFormControlInput1">Data</label>
+                            <input autocomplete="off"type="date" class="form-control" value="0"  id="data1" name="data"  placeholder=""onchange="myFunction2()">
+      
+                            <label for="exampleFormControlInput1">Total</label>
+                            <input class="form-control" type="text" placeholder="0" id="total" name="total" readonly>
+                            <input class="form-control"  type="text" value="<%= id %>" id="pedidoid" name="pedidoid" readonly style="display: none;" >
+                            
+                          </div>
+                          <div class="border-bottom pb-5"><button type="submit" class="btn btn-primary">Adicionar e cadastrar</button></div>          
+                                                                   
+          
+                      </form>
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <% }%>
+
                
 
 
-                <form class="" action="/pedido/adicionarnovo?id=<%= id%>" method="POST">
-                    <div class="form-group" >
-                        <h4 class="text-center">Adicionar ao pedido e Cadastrar </h4>
-    
-                      <label for="exampleFormControlInput1">Produto</label>
-                      <input autocomplete="off"type="text" class="form-control" id="nome" name="nome" placeholder="">
-    
-                      <label for="exampleFormControlInput1">Quantidade</label>
-                      <input autocomplete="off"type="text" class="form-control"  id="quantidade1" name="quantidade"  placeholder=""onchange="myFunction()">
-
-                      <label for="exampleFormControlInput1">Valor unitário</label>
-                      <input autocomplete="off"type="text"  class="form-control" id="unitario1" name="unitario"  placeholder="" onchange="myFunction()">
-
-                      <label for="exampleFormControlInput1">Desconto</label>
-                      <input autocomplete="off"type="text" class="form-control"  value="0"  id="desconto1" name="desconto"  placeholder=""onchange="myFunction()">
-
-                      <label for="exampleFormControlInput1">Data</label>
-                      <input autocomplete="off"type="date" class="form-control" value="0"  id="data1" name="data"  placeholder=""onchange="myFunction2()">
-
-                      <label for="exampleFormControlInput1">Total</label>
-                      <input class="form-control" type="text" placeholder="0" id="total" name="total" readonly>
-                      <input class="form-control"  type="text" value="<%= id %>" id="pedidoid" name="pedidoid" readonly style="display: none;" >
-                      
-                    </div>
-                    <div class="border-bottom pb-5"><button type="submit" class="btn btn-primary">Adicionar e cadastrar</button></div>          
-                                                             
-    
-                </form>
+                
 
                 <script>                
                   now = new Date;
@@ -150,16 +214,12 @@ else id = pedido[0].id;
                 }
 
                </script>
-
-
-                
-
-
-
-                
-
             </div>
+
+          
+
           <div class="col-sm border">
+            <% if (typeof pedidobusca==="undefined"){}else{ %>  
             
             <table class="table">
                 <thead>
@@ -177,8 +237,7 @@ else id = pedido[0].id;
                     var total=0;
                     if (typeof itens==="undefined") var b = 0; else{
                       for(var i = 0; i < itens.length; i++){
-                        total=total+itens[i].total;
-                    
+                        total=total+itens[i].total;               
                     
                     %>
 
@@ -194,7 +253,10 @@ else id = pedido[0].id;
                   <h3 class="text-center">Total: <span id ="totalt" ><%= total %></span></h3>
 
                 </tbody>
-              </table>          
+              </table>   
+              
+              
+              
 
               <script>
                 var numero = parseFloat(document.getElementById("totalt").innerHTML);
@@ -205,36 +267,7 @@ else id = pedido[0].id;
 
 
               
-              <form class="pt-3" action="/pedido/editarpedido?id=<%= id%>" method="POST"> 
-                <div class="form-group" >
-                    <h4 class="text-center">Finalizar pedido </h4>
 
-                  <label for="exampleFormControlInput1">Fase da obra</label>
-                  <select class="form-control" id="fase" name="fase">
-                    <option>Fundação</option>
-                    <option>Alvenaria/Paredes</option>
-                    <option>Laje/Viga Respaldo</option>
-                    <option>Telhado</option>
-                    <option>Reboque</option>
-                    <option>Contrapiso</option>
-                    <option>Piso/Revestimento</option>
-                    <option>Portas/Janelas</option>
-                    <option>Louças/Hidrálica</option>
-                    <option>Elétrica</option>
-                    <option>Pintura</option>
-                    <option>Outros</option>
-                    <% if (typeof pedidobusca==="undefined"){}else{ %>
-                      <option value="1" selected><%= pedidobusca[0].fase%></option>
-                      <% } %>
-                  </select>
-
-                  <label for="exampleFormControlInput1">Total</label>
-                  <input class="form-control" type="text" placeholder="0" id="total2" name="total" value="<%= total %>" readonly>
-                  <input class="form-control"  type="text" value="<%= id %>" id="pedidoid2" name="id" readonly style="display: none;" >
-                  
-                </div>
-                <div class="border-bottom pb-2"><button type="submit" class="btn btn-primary">Salvar pedido</button></div> 
-            </form>
 
 
             
@@ -243,7 +276,7 @@ else id = pedido[0].id;
             <!-- Trigger the modal with a button -->
             <button type="button" class="btn btn-info btn-lg mt-2" data-toggle="modal" data-target="#myModal">Upload Foto Pedido</button>
                 
-      
+            <% } %>
             <div class="modal fade" id="myModal" role="dialog">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
