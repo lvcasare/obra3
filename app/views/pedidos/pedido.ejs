@@ -12,28 +12,28 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pedidos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/pedido">Novo Pedido</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pedidos">Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pedido">Novo Pedido</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
 <% 
 var id=pedidoid;
@@ -44,7 +44,7 @@ var id=pedidoid;
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm border">
+            <div class="col-sm">
 
 
               <form class="pt-3" action="/pedido/editarpedido?id=<%= id%>" method="POST"> 
@@ -53,18 +53,18 @@ var id=pedidoid;
 
                   <label for="exampleFormControlInput1">Fase da obra</label>
                   <select class="form-control" id="fase" name="fase">
-                    <option>Fundação</option>
-                    <option>Alvenaria/Paredes</option>
-                    <option>Laje/Viga Respaldo</option>
-                    <option>Telhado</option>
-                    <option>Reboque</option>
-                    <option>Contrapiso</option>
-                    <option>Piso/Revestimento</option>
-                    <option>Portas/Janelas</option>
-                    <option>Louças/Hidrálica</option>
-                    <option>Elétrica</option>
-                    <option>Pintura</option>
-                    <option>Outros</option>
+                    <option>1 - Fundação</option>
+                    <option>2 - Alvenaria/Paredes</option>
+                    <option>3 - Laje/Viga Respaldo</option>
+                    <option>4 - Telhado</option>
+                    <option>5 - Reboque</option>
+                    <option>6 - Contrapiso</option>
+                    <option>7 - Piso/Revestimento</option>
+                    <option>8 - Portas/Janelas</option>
+                    <option>9 - Louças/Hidrálica</option>
+                    <option>10 - Elétrica</option>
+                    <option>11 - Pintura</option>
+                    <option>0 - Outros</option>
                     <% if (typeof pedidobusca==="undefined"){}else{ %>
                       <option value="1" selected><%= pedidobusca[0].fase%></option>
                       <% } %>
@@ -179,17 +179,21 @@ var id=pedidoid;
 
                 
 
-                <script>                
+                <script>              
                   now = new Date;
                   var mes = now.getMonth()+1;
-                  if (mes>9)                  
-                  var data =now.getFullYear()+'-1'+mes+'-'+now.getDate();
-                  else
-                  var data =now.getFullYear()+'-0'+mes+'-'+now.getDate();             
+                  var dia =now.getDate();                   
+
+                  if (mes>9) mes = '-'+mes;
+                  else mes = '-0'+mes;                   
+                  
+                  if (dia>9) dia ='-'+dia;
+                  else dia ='-0'+dia;
+                  
+                  var data =now.getFullYear()+mes+dia;  
+                            
                   document.getElementById("data").value= data;
                   document.getElementById("data1").value= data;
-
-
                 </script>
 
 
@@ -218,7 +222,7 @@ var id=pedidoid;
 
           
 
-          <div class="col-sm border">
+          <div class="col-sm">
             <% if (typeof pedidobusca==="undefined"){}else{ %>  
             
             <table class="table">
@@ -229,6 +233,7 @@ var id=pedidoid;
                     <th scope="col" class="text-center">Quantidade</th>
                     <th scope="col" class="text-center">Unitário</th>
                     <th scope="col" class="text-center">Total</th>
+                    <th scope="col" class="text-center">Deletar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -246,6 +251,8 @@ var id=pedidoid;
                     <td class="text-center"><%= itens[i].quantidade %></td>
                     <td class="text-center"><%= itens[i].unitario %></td>
                     <td class="text-center"><%= itens[i].total %></td>
+                    <td class="text-center" ><button type="button" class="btn btn-outline-danger btn-sm" onclick="window.location.href='/pedido/deletar?id=<%= id%>&itemid=<%= itens[i].id %>'">Deletar</button></td>
+               
                   </tr>
 
                   <% }} %>
@@ -254,9 +261,6 @@ var id=pedidoid;
 
                 </tbody>
               </table>   
-              
-              
-              
 
               <script>
                 var numero = parseFloat(document.getElementById("totalt").innerHTML);
@@ -264,14 +268,6 @@ var id=pedidoid;
                 document.getElementById("totalt").innerHTML=dinheiro;
 
               </script>
-
-
-              
-
-
-
-            
-
 
             <!-- Trigger the modal with a button -->
             <button type="button" class="btn btn-info btn-lg mt-2" data-toggle="modal" data-target="#myModal">Upload Foto Pedido</button>
