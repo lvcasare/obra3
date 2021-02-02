@@ -43,6 +43,7 @@
               <tr>
                 <th class="text-center"scope="col">#</th>
                 <th class="text-center"scope="col">Id</th>
+                <th class="text-center"scope="col">Data</th>
                 <th class="text-center"scope="col">Fase</th>
                 <th class="text-center"scope="col">Valor Total</th>
                 <th class="text-center"scope="col">Abrir</th>
@@ -52,13 +53,18 @@
             </thead>
             <tbody>
               <tr>
-                <%    var item=0;
+                <%      var item=0;
                         for (var i = 0; i < pedidos.length; i++){
-                        item++; 
+                        item++;
+                        console.log
+                        var data = new Date(pedidos[i].data);
+                        var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
+
                 %>            
     
                 <th class="text-center" scope="row"><%= item %></th>
                 <td class="text-center"><%= pedidos[i].id %></td>
+                <td class="text-center"><%= dataFormatada %> </td>
                 <td class="text-center"><%= pedidos[i].fase %></td>
                 <td class="text-center"><%= pedidos[i].total %></td>
                 <td class="text-center"><button  type="button" class="btn btn-outline-info btn-sm" onclick="window.location.href='/pedido?id=<%= pedidos[i].id %>'">Abrir/Alterar</button></td>
