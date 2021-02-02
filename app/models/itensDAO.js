@@ -15,6 +15,13 @@ ItensDAO.prototype.adicionarAntigo= function (pedido,callback){
 
 }
 
+ItensDAO.prototype.deletar= function (id,callback){   
+
+    this._connection.query('DELETE FROM itens WHERE id = ' + id, callback);
+
+}
+
+
 
 module.exports = function (){
     return ItensDAO;
