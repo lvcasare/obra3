@@ -41,14 +41,15 @@
         <table class="table">
             <thead>
               <tr>
-                <th class="text-center"scope="col">#</th>
-                <th class="text-center"scope="col">Id</th>
-                <th class="text-center"scope="col">Data</th>
+                <!--  <th class="text-center"scope="col">#</th>-->
+                <th class="text-center"scope="col">Id</th>                
                 <th class="text-center"scope="col">Fase</th>
-                <th class="text-center"scope="col">Valor Total</th>
-                <th class="text-center"scope="col">Abrir</th>
-                <th class="text-center"scope="col">Deletar</th>
+                <th class="text-center"scope="col">Obs.</th>
+                <th class="text-center"scope="col">Total</th>
+                <!--  <th class="text-center"scope="col">Abrir</th>-->
+                <!--  <th class="text-center"scope="col">Deletar</th>-->
                 <th class="text-center" scope="col">Comprovante</th>
+                <th class="text-center"scope="col">Data</th>
               </tr>
             </thead>
             <tbody>
@@ -58,25 +59,28 @@
                         item++;
                         console.log
                         var data = new Date(pedidos[i].data);
-                        var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
-
-                %>            
+                        var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + (data.getYear()-100);
+                %>       
     
-                <th class="text-center" scope="row"><%= item %></th>
-                <td class="text-center"><%= pedidos[i].id %></td>
-                <td class="text-center"><%= dataFormatada %> </td>
+                <!--  <th class="text-center" scope="row"><%= item %></th>-->
+                <td class="text-center"><a class="btn btn-info" href="/pedido?id=<%= pedidos[i].id %>"> <%= pedidos[i].id %></a></td>                
                 <td class="text-center"><%= pedidos[i].fase %></td>
+                <td class="text-center"><%= pedidos[i].obs %></td>
                 <td class="text-center"><%= pedidos[i].total %></td>
-                <td class="text-center"><button  type="button" class="btn btn-outline-info btn-sm" onclick="window.location.href='/pedido?id=<%= pedidos[i].id %>'">Abrir/Alterar</button></td>
-                <td class="text-center" ><button type="button" class="btn btn-outline-danger btn-sm" onclick="window.location.href='/pedidos/deletar?id=<%= pedidos[i].id %>'">Deletar</button></td>
-                <td class="text-center"><button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.location.href='/fotos/<%= pedidos[i].id %>.jpg'">Abrir foto</button></td>
-                
-                
+                <!--  <td class="text-center"><button  type="button" class="btn btn-outline-info btn-sm" onclick="window.location.href='/pedido?id=<%= pedidos[i].id %>'">Abrir/Alterar</button></td>-->
+                <!--  <td class="text-center" ></td>-->
+                <td class="text-center"> <a href="/fotos/<%= pedidos[i].id %>.jpg"> <img alt="img"  class="border border-success" style="width: 40px; height: 25px;" src="/fotos/<%= pedidos[i].id %>.jpg" alt=""></a></td>
+                <td class="text-center"><%= dataFormatada %> </td>
 
               </tr> 
               <% }} %>      
             </tbody>
         </table> 
+        <script>
+          $(document).ready(function(){
+              $('[data-toggle="popover"]').popover();   
+          });
+          </script>
       
 
 
