@@ -28,7 +28,7 @@ PedidosDAO.prototype.salvarTotalPedido = function(pedidoid,totalpedido, callback
 }
 PedidosDAO.prototype.carregarTodos = function (callback){  
     this._connection.query('DELETE FROM pedidos WHERE fase = "insert"');     
-    this._connection.query('SELECT * FROM pedidos ORDER BY fase ASC', callback);  
+    this._connection.query('SELECT * FROM pedidos ORDER BY fase ASC, data ASC', callback);  
 }
 
 PedidosDAO.prototype.deletar = function (id, callback){  
