@@ -52,7 +52,7 @@ var id=pedidoid;
 
               <form class="pt-3" action="/pedido/editarpedido?id=<%= id%>" method="POST"> 
                 <div class="form-group" >
-                    <h4 class="text-center">Finalizar pedido </h4>
+                    <h4 class="text-center">Iniciar pedido </h4>
 
                   <label for="exampleFormControlInput1">Fase da obra</label>
                   <select class="form-control" id="fase" name="fase">
@@ -74,19 +74,35 @@ var id=pedidoid;
                   </select>
                   <% if (typeof pedidobusca==="undefined"){%>
                   <label for="exampleFormControlInput1">Data</label>
-                  <input autocomplete="off"type="date" class="form-control" value="0"  id="data3" name="data"  placeholder=""onchange="myFunction2()">   
+                  <input autocomplete="off"type="date" class="form-control" value="0"  id="data3" name="data"  placeholder="">   
                   <% } %>
-                  <label for="exampleFormControlInput1">Total</label>
+                  <label for="exampleFormControlInput1">Observação:</label>
+                  <% if (typeof pedidobusca==="undefined"){%>
+                  <input class="form-control" type="text" placeholder="" id="obs" name="obs" value="">
+                  <% }else{ %>
+                  <input class="form-control" type="text" placeholder="" id="obs" name="obs" value="<%= pedidobusca[0].obs%>">
+                  <% } %>
+
+
                   <input class="form-control" type="text" placeholder="0" id="total2" name="total" value="0" readonly style="display: none;">
                   <input class="form-control"  type="text" value="<%= id %>" id="pedidoid2" name="id" readonly style="display: none;" >
-                  
+
+                                    
                 </div>
-                <div class="border-bottom pb-2"><button type="submit" class="btn btn-primary">Abrir Pedido</button></div> 
+                <% if (typeof pedidobusca==="undefined"){%>
+                <button type="submit" class="btn btn-primary">Abrir Pedido</button>
+                <button type="button" class="btn btn-danger" onclick="window.location.href='/pedidos/deletar?id=<%= id %>'">Deletar Pedido</button>
+                <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>'">Pagamentos</button>
+                <% }else { %>
+                  <button type="submit" class="btn btn-warning">Alterar Pedido</button>
+                  <button type="button" class="btn btn-danger" onclick="window.location.href='/pedidos/deletar?id=<%= id %>'">Deletar Pedido</button>
+                  <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>'">Pagamentos</button>
+                  <% } %>
               </form>
+              
+              
 
-
-
-              <% if (typeof pedidobusca==="undefined"){}else{ %>
+              <% if (typeof pedidobusca==="undefined"){}else{ %>                
 
               <form class="pt-3" action="/pedido/adicionarantigo?id=<%= id%>" method="POST">
                     <div class="form-group">
@@ -111,7 +127,7 @@ var id=pedidoid;
                       <input autocomplete="off"type="text" class="form-control" value="0"  id="desconto" name="desconto"  placeholder=""onchange="myFunction2()">
 
                       <label for="exampleFormControlInput1">Data</label>
-                      <input autocomplete="off"type="date" class="form-control" value="0"  id="data" name="data"  placeholder=""onchange="myFunction2()">                      
+                      <input autocomplete="off"type="date" class="form-control" value="2021-02-03"  id="data" name="data"  placeholder=""onchange="myFunction2()">                      
 
 
                       <label for="exampleFormControlInput1">Total</label>
@@ -181,16 +197,6 @@ var id=pedidoid;
                 </div>
 
                 <% }%>
-
-               
-
-
-                
-
-
-
-
-
                 <script>               
 
                
@@ -304,8 +310,11 @@ var id=pedidoid;
               </div>
             </div>
 
+            
 
-            <script>  
+
+
+            <script>
                         
               now = new Date;
               var mes = now.getMonth()+1;
@@ -318,12 +327,26 @@ var id=pedidoid;
               else dia ='-0'+dia;
               
               var data =now.getFullYear()+mes+dia; 
-
                         
-              document.getElementById("data3").value= data;
               document.getElementById("data").value= data;
               document.getElementById("data1").value= data;
             </script>
+                        <script>
+                        
+                          now = new Date;
+                          var mes = now.getMonth()+1;
+                          var dia =now.getDate();                   
+            
+                          if (mes>9) mes = '-'+mes;
+                          else mes = '-0'+mes;                   
+                          
+                          if (dia>9) dia ='-'+dia;
+                          else dia ='-0'+dia;
+                          
+                          var data =now.getFullYear()+mes+dia; 
+                                    
+                          document.getElementById("data3").value= data;
+                        </script>
 
 
          
