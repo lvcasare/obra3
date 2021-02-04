@@ -42,22 +42,91 @@
 
       
       <div class="container-fluid">
-        <h1>Pagamentos!</h1>
-        <div class="row">
-          <div class="col-sm">
-            One of three columns
-          </div>
-          <div class="col-sm">
-            One of three columns
-          </div>
-          <div class="col-sm">
-            One of three columns
-          </div>
+      <h1>Pagamentos</h1>
+
+
+      <form class="pt-3" action="/pagamento/adicionar?id=<%= get.id%>&total=<%= get.total%>" method="POST">
+        <div class="form-group">
+            <h4 class="text-center">Adicionar pagamento</h4>                   
+
+          <label for="exampleFormControlInput1">Pagador</label>
+          <select class="form-control" id="pagador" name="pagador">
+            <option>Leandro</option>
+            <option>Andrew</option>
+          </select>
+
+          <label for="exampleFormControlInput1">Valor (<%= get.total%>)</label>
+          <input autocomplete="off"type="text" class="form-control"  id="valor" name="valor" placeholder="">
+
+          <label for="exampleFormControlInput1">Data</label>
+                  <input autocomplete="off"type="date" class="form-control" value=""  id="data" name="data"  placeholder="">  
+
+          <label for="exampleFormControlInput1">Observação</label>
+          <input autocomplete="off"type="text" class="form-control"  id="obs" name ="obs" placeholder="">
+
+          <input autocomplete="off"type="text" class="form-control" value="<%= get.id%>"  id="pedidoid" name ="pedidoid" placeholder="" style="display: none;">
+          
         </div>
+        <div class="border-bottom pb-2"><button type="submit" class="btn btn-primary">Adicionar</button></div>                    
+
+    </form>
+
       </div>
 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Pagador</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Data</th>
+            <th scope="col">Obs.</th>
+            <th scope="col">Comprovante</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <%      var item=0;
+            for (var i = 0; i < pagamentos.length; i++){
+            item++;
+            var data = new Date(pagamentos[i].data);
+            var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + (data.getYear()-100);
+            %>       
+            <tr>
+              <th scope="row"><%= pagamentos[i].pedidoid%></th>
+              <td><%= pagamentos[i].pagador%></td>
+              <td><%= pagamentos[i].valor%></td>
+              <td><%= dataFormatada%></td>
+              <td><%= pagamentos[i].obs%></td>
+              <td><a href=""><img src="" alt=""></a></td>
+            </tr>
+            <%}%>
+          
+        </tbody>
+      </table>
 
 
+
+
+
+
+
+            <script>
+                        
+              now = new Date;
+              var mes = now.getMonth()+1;
+              var dia =now.getDate();                   
+
+              if (mes>9) mes = '-'+mes;
+              else mes = '-0'+mes;                   
+              
+              if (dia>9) dia ='-'+dia;
+              else dia ='-0'+dia;
+              
+              var data =now.getFullYear()+mes+dia; 
+                        
+              document.getElementById("data").value= data;
+            </script>
 
     
 
