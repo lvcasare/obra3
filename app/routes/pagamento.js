@@ -6,6 +6,11 @@ module.exports = function (application){
         
     });
 
+    application.post('/pagamento/adicionar', function (req,res){
+        application.app.controllers.pagamento.adicionar(application,req,res);
+        
+    });
+
 
 
 }
