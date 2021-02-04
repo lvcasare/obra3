@@ -62,11 +62,25 @@ module.exports.upload2 = function(application, req, res){
 module.exports.pagamentos = function(application, req, res){  
     var connection = application.config.dbConnection(); 
 
+    var pedidos;
+
+
+    var pedidosModel = new application.app.models.pedidosDAO(connection);       
+    
+    var callback = function(erro,result){
+            pedidos=result;
+                      
+            };        
+    pedidosModel.carregarTodos(callback);
+
+
+
+
     var pagamentoModel = new application.app.models.pagamentosDAO(connection);       
     
     var callback = function(erro,result){
-            console.log(result);
-            res.render('pagamentos/pagamentos.ejs',{pagamentos:result});;
+        //console.log(pedidos) ; 
+            res.render('pagamentos/pagamentos.ejs',{pagamentos:result, pedidos:pedidos});;
             };        
     pagamentoModel.pagamentos(callback);
 }
