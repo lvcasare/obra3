@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pedidos">Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pedido">Novo Pedido</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pagamentos">Pagamentos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+      
+      <div class="container-fluid">
+      <h1 class="text-center">Pagamentos</h1>
+
+
+     </div>
+
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">Pedido</th>
+            <th class="text-center" scope="col">Pagador</th>
+            <th class="text-center" scope="col">Valor</th>
+            <th class="text-center" scope="col">Data</th>
+            <th class="text-center" scope="col">Obs.</th>
+            <th class="text-center" scope="col">Comprovante</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <%      var item=0;
+            var total=0;
+            for (var i = 0; i < pagamentos.length; i++){
+              
+            item++;
+            var data = new Date(pagamentos[i].data);
+            var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + (data.getYear()-100);
+            if (pagamentos[i].pagador=="Andrew"){
+              total = total+pagamentos[i].valor;
+            %>       
+            <tr>
+              <th class="text-center" scope="row"><%= pagamentos[i].pedidoid%></th>
+              <td class="text-center"><%= pagamentos[i].pagador%></td>
+              <td class="text-center"><%= pagamentos[i].valor%></td>
+              <td class="text-center"><%= dataFormatada%></td>
+              <td class="text-center"><%= pagamentos[i].obs%></td>
+              <td class="text-center">
+                <% if (pagamentos[i].img==1) {%> 
+                  <a href="/pag/<%= pagamentos[i].id%>.jpg"> 
+                <% } else {%> 
+                  <a href="/pagamento/upload?id=<%= pagamentos[i].id%>&pedidoid=<%= pagamentos[i].pedidoid%>"> 
+                <% }%>
+                <img alt="img"  class="border border-success" style="width: 40px; height: 25px;" 
+                src="/pag/<%= pagamentos[i].id%>.jpg" alt="">
+              </a>            
+            </td>                
+            </tr>
+            <%}}%>          
+        </tbody>
+
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">Pedido</th>
+            <th class="text-center" scope="col">Pagador</th>
+            <th class="text-center" scope="col">Valor</th>
+            <th class="text-center" scope="col">Data</th>
+            <th class="text-center" scope="col">Obs.</th>
+            <th class="text-center" scope="col">Comprovante</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <%      var item=0;
+            var total2 = 0;
+            for (var i = 0; i < pagamentos.length; i++){
+            item++;
+            var data = new Date(pagamentos[i].data);
+            var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + (data.getYear()-100);
+            if (pagamentos[i].pagador=="Leandro"){
+              total2 = total2+pagamentos[i].valor;
+            %>       
+            <tr>
+              <th class="text-center" scope="row"><%= pagamentos[i].pedidoid%></th>
+              <td class="text-center"><%= pagamentos[i].pagador%></td>
+              <td class="text-center"><%= pagamentos[i].valor%></td>
+              <td class="text-center"><%= dataFormatada%></td>
+              <td class="text-center"><%= pagamentos[i].obs%></td>
+              <td class="text-center">
+                <% if (pagamentos[i].img==1) {%> 
+                  <a href="/pag/<%= pagamentos[i].id%>.jpg"> 
+                <% } else {%> 
+                  <a href="/pagamento/upload?id=<%= pagamentos[i].id%>&pedidoid=<%= pagamentos[i].pedidoid%>"> 
+                <% }%>
+                <img alt="img"  class="border border-success" style="width: 40px; height: 25px;" 
+                src="/pag/<%= pagamentos[i].id%>.jpg" alt="">
+              </a>            
+            </td>                
+            </tr>
+            <%}} var total3=total+total2%>          
+        </tbody>
+        
+      </table>
+
+      <h3 class="ml-3">Total Andrew: <span id ="totalt" ><%= total %></span></h3>
+      <h3 class="ml-3">Total Leandro: <span id ="totalt2" ><%= total2 %></span></h3>
+      <h1 class="ml-3">Total Geral: <span id ="totalt3" ><%= total3 %></span></h3>
+      
+      <script>
+
+
+        var numero = parseFloat(document.getElementById("totalt").innerHTML);
+        var dinheiro = numero.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+        document.getElementById("totalt").innerHTML=dinheiro;
+
+        var numero = parseFloat(document.getElementById("totalt2").innerHTML);
+        var dinheiro = numero.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+        document.getElementById("totalt2").innerHTML=dinheiro;
+
+        var numero = parseFloat(document.getElementById("totalt3").innerHTML);
+        var dinheiro = numero.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+        document.getElementById("totalt3").innerHTML=dinheiro;
+
+
+                        
+              now = new Date;
+              var mes = now.getMonth()+1;
+              var dia =now.getDate();                   
+
+              if (mes>9) mes = '-'+mes;
+              else mes = '-0'+mes;                   
+              
+              if (dia>9) dia ='-'+dia;
+              else dia ='-0'+dia;
+              
+              var data =now.getFullYear()+mes+dia; 
+                        
+              document.getElementById("data").value= data;
+            </script>
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
