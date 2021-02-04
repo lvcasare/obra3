@@ -92,11 +92,11 @@ var id=pedidoid;
                 <% if (typeof pedidobusca==="undefined"){%>
                 <button type="submit" class="btn btn-primary">Abrir Pedido</button>
                 <button type="button" class="btn btn-danger" onclick="window.location.href='/pedidos/deletar?id=<%= id %>'">Deletar Pedido</button>
-                <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>'">Pagamentos</button>
+                <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>&total=<%= totalpedido %>'">Pagamentos</button>
                 <% }else { %>
                   <button type="submit" class="btn btn-warning">Alterar Pedido</button>
                   <button type="button" class="btn btn-danger" onclick="window.location.href='/pedidos/deletar?id=<%= id %>'">Deletar Pedido</button>
-                  <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>'">Pagamentos</button>
+                  <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>&total=<%= totalpedido %>'">Pagamentos</button>
                   <% } %>
               </form>
               
@@ -241,8 +241,7 @@ var id=pedidoid;
                     var total=0;
                     if (typeof itens==="undefined") var b = 0; else{
                       for(var i = 0; i < itens.length; i++){
-                        total=total+itens[i].total;               
-                    
+                        total=total+itens[i].total;
                     %>
 
                     <th scope="row"><%= i+1 %></th>
