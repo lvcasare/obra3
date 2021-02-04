@@ -45,7 +45,7 @@ module.exports.pedido = function(application, req, res){
                         };                            
                     pedidosModel.salvarTotalPedido(pedidoid,totalpedido,callback2)
                     ///////////////////////////////////////////////////////////////////////
-                    res.render('pedidos/pedido.ejs',{itens:result, produtos:produtosresult,pedidobusca:pedidobusca, pedidoid:pedidoid});;
+                    res.render('pedidos/pedido.ejs',{itens:result, produtos:produtosresult,pedidobusca:pedidobusca, pedidoid:pedidoid,totalpedido:totalpedido});;
                     };                            
                 itensModel.carregarItens(pedidoid, callback1)
             }    
