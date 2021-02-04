@@ -34,12 +34,6 @@
       </ul>
     </div>
   </nav>
-    
-
-
-
-  
-
       
       <div class="container-fluid">
       <h1>Pagamentos</h1>
@@ -76,12 +70,12 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Pedido</th>
-            <th scope="col">Pagador</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Data</th>
-            <th scope="col">Obs.</th>
-            <th scope="col">Comprovante</th>
+            <th class="text-center" scope="col">Pedido</th>
+            <th class="text-center" scope="col">Pagador</th>
+            <th class="text-center" scope="col">Valor</th>
+            <th class="text-center" scope="col">Data</th>
+            <th class="text-center" scope="col">Obs.</th>
+            <th class="text-center" scope="col">Comprovante</th>
           </tr>
         </thead>
         <tbody>
@@ -93,12 +87,21 @@
             var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + (data.getYear()-100);
             %>       
             <tr>
-              <th scope="row"><%= pagamentos[i].pedidoid%></th>
-              <td><%= pagamentos[i].pagador%></td>
-              <td><%= pagamentos[i].valor%></td>
-              <td><%= dataFormatada%></td>
-              <td><%= pagamentos[i].obs%></td>
-              <td><a href=""><img src="" alt=""></a></td>
+              <th class="text-center" scope="row"><%= pagamentos[i].pedidoid%></th>
+              <td class="text-center"><%= pagamentos[i].pagador%></td>
+              <td class="text-center"><%= pagamentos[i].valor%></td>
+              <td class="text-center"><%= dataFormatada%></td>
+              <td class="text-center"><%= pagamentos[i].obs%></td>
+              <td class="text-center">
+                <% if (pagamentos[i].img==0) {%> 
+                  <a href="/pag/<%= pagamentos[i].id%>.jpg"> 
+                <% } else {%> 
+                  <a href="/pagamento/imagem?id=<%= pagamentos[i].id%>"> 
+                <% }%>
+                <img alt="img"  class="border border-success" style="width: 40px; height: 25px;" 
+                src="/pag/<%= pagamentos[i].id%>.jpg" alt="">
+              </a></td>
+                
             </tr>
             <%}%>
           
