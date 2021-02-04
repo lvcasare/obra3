@@ -1,10 +1,7 @@
 module.exports = function (application){
     
 
-    application.get('/', function (req,res){
-        application.app.controllers.pedido.pedido(application,req,res);
-        
-    });
+
     application.get('/pedido', function (req,res){
         application.app.controllers.pedido.pedido(application,req,res);
         
