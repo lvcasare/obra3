@@ -95,7 +95,7 @@ var id=pedidoid;
                 <% if (typeof pedidobusca==="undefined"){%>
                 <button type="submit" class="btn btn-primary">Abrir Pedido</button>
                 <button type="button" class="btn btn-danger" onclick="window.location.href='/pedidos/deletar?id=<%= id %>'">Deletar Pedido</button>
-                <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>&total=<%= totalpedido %>'">Pagamentos</button>
+                <button type="button" class="btn btn-info" onclick="window.location.href='/pagamento?id=<%= id %>&total=0'">Pagamentos</button>
                 <% }else { %>
                   <button type="submit" class="btn btn-warning">Alterar Pedido</button>
                   <button type="button" class="btn btn-danger" onclick="window.location.href='/pedidos/deletar?id=<%= id %>'">Deletar Pedido</button>
