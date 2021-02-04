@@ -50,6 +50,8 @@
         <thead>
           <tr>
             <th class="text-center" scope="col">Pedido</th>
+            <th class="text-center" scope="col">Obs. Pedido</th>
+            <th class="text-center" scope="col">Fase</th>
             <th class="text-center" scope="col">Pagador</th>
             <th class="text-center" scope="col">Valor</th>
             <th class="text-center" scope="col">Data</th>
@@ -61,8 +63,10 @@
           
             <%      var item=0;
             var total=0;
+
             for (var i = 0; i < pagamentos.length; i++){
-              
+
+            for (var f = 0; pagamentos[i].pedidoid != pedidos[f].id; f++);
             item++;
             var data = new Date(pagamentos[i].data);
             var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + (data.getYear()-100);
@@ -70,7 +74,9 @@
               total = total+pagamentos[i].valor;
             %>       
             <tr>
-              <th class="text-center" scope="row"><%= pagamentos[i].pedidoid%></th>
+              <th class="text-center" scope="row"> <a href="/pedido?id=<%= pagamentos[i].pedidoid%>"><%= pagamentos[i].pedidoid%></a></th>
+              <td class="text-center"><%= pedidos[f].obs%></td>
+              <td class="text-center"><%= pedidos[f].fase%></td>
               <td class="text-center"><%= pagamentos[i].pagador%></td>
               <td class="text-center"><%= pagamentos[i].valor%></td>
               <td class="text-center"><%= dataFormatada%></td>
@@ -92,6 +98,8 @@
         <thead>
           <tr>
             <th class="text-center" scope="col">Pedido</th>
+            <th class="text-center" scope="col">Obs. Pedido</th>
+            <th class="text-center" scope="col">Fase</th>
             <th class="text-center" scope="col">Pagador</th>
             <th class="text-center" scope="col">Valor</th>
             <th class="text-center" scope="col">Data</th>
@@ -104,6 +112,8 @@
             <%      var item=0;
             var total2 = 0;
             for (var i = 0; i < pagamentos.length; i++){
+            
+            for (var f = 0; pagamentos[i].pedidoid != pedidos[f].id; f++);
             item++;
             var data = new Date(pagamentos[i].data);
             var dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + (data.getYear()-100);
@@ -111,7 +121,9 @@
               total2 = total2+pagamentos[i].valor;
             %>       
             <tr>
-              <th class="text-center" scope="row"><%= pagamentos[i].pedidoid%></th>
+              <th class="text-center" scope="row"> <a href="/pedido?id=<%= pagamentos[i].pedidoid%>"><%= pagamentos[i].pedidoid%></a></th>
+              <td class="text-center"><%= pedidos[f].obs%></td>
+              <td class="text-center"><%= pedidos[f].fase%></td>
               <td class="text-center"><%= pagamentos[i].pagador%></td>
               <td class="text-center"><%= pagamentos[i].valor%></td>
               <td class="text-center"><%= dataFormatada%></td>
