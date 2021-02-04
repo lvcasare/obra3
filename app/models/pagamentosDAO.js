@@ -18,6 +18,7 @@ pagamentosDAO.prototype.updateUpload = function (id, callback){
 
 pagamentosDAO.prototype.pagamentos = function (callback){ 
     this._connection.query('SELECT * FROM pagamentos ', callback);
+
 }
 
 
