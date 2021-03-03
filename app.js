@@ -1,7 +1,5 @@
 var app = require("./config/server.js");
 
-
-
 app.get('/meu', function (req,res){// pega url
     res.render('meu/meu.ejs');
 });
@@ -16,4 +14,7 @@ app.get('/meu', function (req,res){// pega url
 app.listen(3000,function(){// inicia servidor .@1
     console.log('Express listenning 3000.');
 });
+
+
+
 
