@@ -1,10 +1,45 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React Basics</title>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    class App extends React.Component {
+      state = {
+        name: 'Ryu',
+        age: 30
+      }
+      handleMouseOver(e){
+        console.log(e.target, e.pageX);
+      }
+      handleClick(e){
+        console.log(e.target);
+        // console.log(this.state); --> will not work, see next video
+      }
+      handleCopy(e){
+        console.log('Try being original for once');
+      }
+      render(){
+        return(
+          <div className="app-content">
+            <h1>Hello, ninjas!</h1>
+            <p>My name is: { this.state.name } and I am { this.state.age }</p>
+            <button onClick={this.handleClick}>Click me</button>
+            <button onMouseOver={this.handleMouseOver}>Hover me</button>
+            <p onCopy={this.handleCopy}>What we think, we become</p>
+          </div>
+        )
+      }
+    }
 
-  <form klicksend-form-id='95ur6zK' method="post" action="//handler.klicksend.com.br/subscription/95ur6zK">
-    <input type="email" name="email" id="email" placeholder="Email" value="" required>
-<input type="text" name="first_name" id="first_name" placeholder="Primeiro Nome" value="" >
-<div klicksend-gdpr-text style="font-size: 10px; color: #86919a; margin-bottom: 5px; text-align: left;"><p> Esses dados serão utilizados para entrarmos em contato com você e disponibilizarmos mais conteúdos e ofertas. Caso você não queira mais receber os nosso emails, cada email que você receber, incluirá ao final, um link que poderá ser usado para remover o seu email da nossa lista de distribuição. </p><p> Para mais informações, acesse:<a href="https://example.com.br/politica-de-privacidade/" target="_blank" rel="noopener">https://example.com.br/politica-de-privacidade/</a> </p> </div>  <input type="checkbox" name="gdpr" id="gdpr" placeholder="Concordo em receber os e-mails" value="Concordo em receber os e-mails" required> <label for="gdpr"> Concordo em receber os e-mails </label>
-  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-  <input type="text" name="b_95ur6zK" tabindex="-1" value="">
-</div>
-  <button >Enviar</button>
-</form>
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+</body>
+</html>
