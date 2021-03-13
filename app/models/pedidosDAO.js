@@ -10,7 +10,7 @@ PedidosDAO.prototype.carregarPedido2 = function (pedidoid,callback){
 }
 PedidosDAO.prototype.adicionarNovo = function (pedido,callback){   
 
-    this._connection.query('INSERT INTO produtos SET ?', pedido);
+    this._connection.query('INSERT INTO produtos (nome) VALUES ('+pedido.nome+');');
     this._connection.query('INSERT INTO itens SET ?', pedido, callback);
 }
 PedidosDAO.prototype.editarPedido = function(pedido, callback){
