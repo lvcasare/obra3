@@ -38,19 +38,14 @@ module.exports.upload2 = function(application, req, res){
 
     var path = require('path');
     var appDir = path.dirname(require.main.filename);
-    console.log('***********************************************');
-    console.log('path: '+appDir);
-    console.log('***********************************************');
-    console.log(path.basename);
-    console.log('***********************************************');
-    console.log(appDir);
-    console.log('***********************************************');
+
 
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
       console.log(files.filetoupload.name);
       var z = files.filetoupload.name.slice(-3);
+      if (z=='peg') z='jpg';
       console.log(z);
       //var newpath =  appDir+"/app/public/pag/"+get.id+'.jpg';
       var newpath =  appDir+"/app/public/arq/"+get.id+'.'+z;
