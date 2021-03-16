@@ -35,6 +35,10 @@ PedidosDAO.prototype.deletar = function (id, callback){
     this._connection.query('DELETE FROM pedidos WHERE id = '+ id, callback);
 }
 
+PedidosDAO.prototype.updatenota = function (id,nota ,callback){  
+    this._connection.query('UPDATE pedidos SET nota='+nota+' WHERE id= '+ id, callback);
+}
+
 
 module.exports = function (){
     return PedidosDAO;
