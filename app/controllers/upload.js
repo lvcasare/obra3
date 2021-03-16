@@ -1,7 +1,8 @@
 module.exports.upload1 = function(application, req, res){
     var pedido = req.body;
     var id_pedido=req.query;
-    //console.log("este "+id_pedido.id)
+    var get=req.query;
+    console.log(get)
     var formidable = require('formidable');
     var fs = require('fs');
 
@@ -30,7 +31,11 @@ module.exports.upload1 = function(application, req, res){
     var connection = application.config.dbConnection();// conexão com o bd que vem config/dbConnection    
     var pedidosModel = new application.app.models.pedidosDAO(connection);// query
 
+
+    var callback = function(erro,result){
         res.redirect('/pedido?id='+id_pedido.id);
+        };        
+        pedidosModel.updatenota(get.id,get.nota,callback);        
      
 
 }
