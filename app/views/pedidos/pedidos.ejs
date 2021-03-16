@@ -74,7 +74,19 @@
                 <td class="text-center"><%= pedidos[i].total %></td>
                 <!--  <td class="text-center"><button  type="button" class="btn btn-outline-info btn-sm" onclick="window.location.href='/pedido?id=<%= pedidos[i].id %>'">Abrir/Alterar</button></td>-->
                 <!--  <td class="text-center" ></td>-->
-                <td class="text-center"> <a href="/fotos/<%= pedidos[i].id %>.jpg"> <img alt="img"  class="border border-success" style="width: 40px; height: 25px;" src="/fotos/<%= pedidos[i].id %>.jpg" alt=""></a></td>
+                <% if (pedidos[i].tipo==0) {%>
+                <td class="text-center"> 
+                  <a class="btn btn-warning" > Não                    
+                  </a>
+                </td>
+                <% } else {%>
+                  <td class="text-center"> 
+                    <a class="btn btn-success" href="/fotos/<%= pedidos[i].id %>.<%= pedidos[i].tipo %>"> Abrir                    
+                    </a>
+                  </td>
+
+                <% } %>
+
                 <td class="text-center"><%= dataFormatada %> </td>
 
               </tr> 
