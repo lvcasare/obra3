@@ -83,14 +83,13 @@
               <td class="text-center"><%= pagamentos[i].obs%></td>
               <td class="text-center">
                 <% if (pagamentos[i].img==1) {%> 
-                  <a href="/pag/<%= pagamentos[i].id%>.jpg"> 
+                  <a class="btn btn-success" href="/pag/<%= pagamentos[i].id%>.<%= pagamentos[i].tipo%>"> Abrir
                 <% } else {%> 
-                  <a href="/pagamento/upload?id=<%= pagamentos[i].id%>&pedidoid=<%= pagamentos[i].pedidoid%>"> 
+                  <a class="btn btn-warning" href="/pagamento/upload?id=<%= pagamentos[i].id%>&pedidoid=<%= pagamentos[i].pedidoid%>"> Enviar
                 <% }%>
-                <img alt="img"  class="border border-success" style="width: 40px; height: 25px;" 
-                src="/pag/<%= pagamentos[i].id%>.jpg" alt="">
+                
               </a>            
-            </td>                
+            </td>                 
             </tr>
             <%}}%>          
         </tbody>
@@ -130,12 +129,11 @@
               <td class="text-center"><%= pagamentos[i].obs%></td>
               <td class="text-center">
                 <% if (pagamentos[i].img==1) {%> 
-                  <a href="/pag/<%= pagamentos[i].id%>.jpg"> 
+                  <a class="btn btn-success" href="/pag/<%= pagamentos[i].id%>.<%= pagamentos[i].tipo%>"> Abrir
                 <% } else {%> 
-                  <a href="/pagamento/upload?id=<%= pagamentos[i].id%>&pedidoid=<%= pagamentos[i].pedidoid%>"> 
+                  <a class="btn btn-warning" href="/pagamento/upload?id=<%= pagamentos[i].id%>&pedidoid=<%= pagamentos[i].pedidoid%>"> Enviar
                 <% }%>
-                <img alt="img"  class="border border-success" style="width: 40px; height: 25px;" 
-                src="/pag/<%= pagamentos[i].id%>.jpg" alt="">
+                
               </a>            
             </td>                
             </tr>
