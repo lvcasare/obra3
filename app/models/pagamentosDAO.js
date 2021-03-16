@@ -12,8 +12,8 @@ pagamentosDAO.prototype.adicionar = function (pagamento, callback){
     this._connection.query('INSERT INTO pagamentos SET ?', pagamento, callback);
 }
 
-pagamentosDAO.prototype.updateUpload = function (id, callback){ 
-    this._connection.query('UPDATE pagamentos SET img=1 WHERE id= '+ id, callback);
+pagamentosDAO.prototype.updateUpload = function (id, z,callback){ 
+    this._connection.query('UPDATE pagamentos SET img=1,tipo="'+z+'" WHERE id= '+ id, callback);
 }
 
 pagamentosDAO.prototype.pagamentos = function (callback){ 
