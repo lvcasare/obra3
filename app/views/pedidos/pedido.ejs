@@ -312,13 +312,13 @@ var id=pedidoid;
 
                     </script>
 
-                      <div class="card text-center" style="width: 18rem;">
-                        <a target="_blank" href="fotos/<%= id%>.jpg"><img class="card-img-top" src="fotos/<%= id%>.jpg" alt="Card image cap" ></a>
-                        <div class="card-body">
-                          <p class="card-text"></p>
-
-                        </div>
-                      </div>
+                      
+                        <% if (pedidobusca[0].tipo==0){ %>
+                        <a  class="btn btn-warning" >Sem pedido</a>
+                        <% }else{ %>
+                          <a target="_blank" class="btn btn-success" href="fotos/<%= id%>.<%= pedidobusca[0].tipo%>">Ver pedido</a>
+                          <% } %> 
+                        
                       <% } %>
 
                   </div>
