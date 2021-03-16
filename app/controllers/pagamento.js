@@ -43,7 +43,11 @@ module.exports.upload2 = function(application, req, res){
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
-      var newpath =  appDir+"/app/public/pag/"+get.id+'.jpg';
+
+      var z = files.filetoupload.name.slice(-3);
+      if (z=='peg') z='jpg';
+      
+      var newpath =  appDir+"/app/public/pag/"+get.id+'.'+z;
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
         //res.write('File uploaded and moved!');
@@ -52,7 +56,7 @@ module.exports.upload2 = function(application, req, res){
         var callback = function(erro,result){
             res.redirect('/pagamento?id='+get.pedidoid);
             };        
-        pagamentoModel.updateUpload(get.id,callback)
+        pagamentoModel.updateUpload(get.id,z,callback)
     });
 });
 
